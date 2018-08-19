@@ -389,6 +389,33 @@ packRGBXL(UINT8* out, const UINT8* in, int pixels)
 }
 
 static void
+packRGB_L(UINT8* out, const UINT8* in, int pixels)
+{
+    /* Greyscale to RGB */
+    int i;
+    for (i = 0; i < pixels; i++) {
+        out[0] = in[i];
+        out[1] = in[i];
+        out[2] = in[i];
+        out += 3;
+    }
+}
+
+static void
+packRGBA_L(UINT8* out, const UINT8* in, int pixels)
+{
+    /* Greyscale to RGBA */
+    int i;
+    for (i = 0; i < pixels; i++) {
+        out[0] = in[i];
+        out[1] = in[i];
+        out[2] = in[i];
+        out[3] = 255;
+        out += 4;
+    }
+}
+
+static void
 packI16B(UINT8* out, const UINT8* in_, int pixels)
 {
     int i;
@@ -543,6 +570,10 @@ static struct {
     /* greyscale w. alpha */
     {"LA",      "LA",           16,     packLA},
     {"LA",      "LA;L",         16,     packLAL},
+
+    /* greyscale to RGB */
+    {"L",       "RGBA",          32,     packRGBA_L},
+    {"L",       "RGB",          24,     packRGB_L},
 
     /* palette */
     {"P",       "P;1",          1,      pack1},

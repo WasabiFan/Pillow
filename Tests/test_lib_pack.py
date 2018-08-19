@@ -41,6 +41,8 @@ class TestLibPack(PillowTestCase):
         self.assert_pack("L", "L", 1, 1, 2, 3, 4)
         self.assert_pack("L", "L;16", b'\x00\xc6\x00\xaf', 198, 175)
         self.assert_pack("L", "L;16B", b'\xc6\x00\xaf\x00', 198, 175)
+        self.assert_pack("L", "RGB", b'\xc6\xc6\xc6\xaf\xaf\xaf', 198, 175)
+        self.assert_pack("L", "RGBA", b'\xc6\xc6\xc6\xff\xaf\xaf\xaf\xff', 198, 175)
 
     def test_LA(self):
         self.assert_pack("LA", "LA", 2, (1, 2), (3, 4), (5, 6))
